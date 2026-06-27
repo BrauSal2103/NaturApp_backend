@@ -21,7 +21,7 @@ app.use(express.json());
 
 
 // ── Conexión a Base de Datos ──
-mongoose.connect('mongodb://localhost:27017/naturapp')
+mongoose.connect('mongodb+srv://brauliosaldana:BasaMONGODB2103@tcsm-s11.symhi5q.mongodb.net/?appName=TCSM-S11')
   .then(() => console.log('MongoDB conectado'))
   .catch(err => console.error('Error de conexión:', err));
 
