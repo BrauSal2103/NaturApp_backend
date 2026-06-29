@@ -21,8 +21,8 @@ app.use(express.json());
 
 
 // ── Conexión a Base de Datos ──
-mongoose.connect('mongodb+srv://brauliosaldana:BasaMONGODB2103@tcsm-s11.symhi5q.mongodb.net/?appName=TCSM-S11')
-  .then(() => console.log('MongoDB conectado'))
+mongoose.connect('mongodb://brauliosaldana:<dbpasword>@ac-qovj3x7-shard-00-00.symhi5q.mongodb.net:27017,ac-qovj3x7-shard-00-01.symhi5q.mongodb.net:27017,ac-qovj3x7-shard-00-02.symhi5q.mongodb.net:27017/naturapp?ssl=true&replicaSet=atlas-yhmo0d-shard-0&authSource=admin&appName=TCSM-S11')
+  .then(() => console.log('MongoDB conectado a NaturApp'))
   .catch(err => console.error('Error de conexión:', err));
 
 

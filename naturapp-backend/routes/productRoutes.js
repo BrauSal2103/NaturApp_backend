@@ -5,22 +5,19 @@ import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-
 // GET /api/products — Listar productos (público)
 router.get('/', async (req, res) => {
   try {
     const { category, search, page = 1, limit = 20 } = req.query;
-    const filter = { isActive: true };
+    const filter = {};
     if (category) filter.category = category;
     if (search) filter.$text = { $search: search };
-
 
     const products = await Product.find(filter)
       .populate('category', 'name icon')
       .skip((page - 1) * limit)
       .limit(Number(limit))
       .sort({ createdAt: -1 });
-
 
     const total = await Product.countDocuments(filter);
     res.json({

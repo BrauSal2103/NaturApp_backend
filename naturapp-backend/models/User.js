@@ -19,12 +19,17 @@ const userSchema = new mongoose.Schema({
 
 
 // Hash de contraseña antes de guardar
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
+// Hash de contraseña antes de guardar (Versión Mongoose Moderno)
+userSchema.pre('save', async function() {
+  // Si la contraseña no ha sido modificada, terminamos la ejecución aquí
+  if (!this.isModified('password')) {
+    return;
+  }
+  
+  // Generamos la "sal" y encriptamos directamente
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
-
 
 // Método para comparar contraseñas
 userSchema.methods.comparePassword = async function(candidate) {
